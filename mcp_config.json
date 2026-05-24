@@ -1,0 +1,18 @@
+{
+    "mcpServers": {        
+        "fetch": {
+            "command": "npx",
+            "args": ["-y", "mcp-fetch-server"]
+        },
+        "tavily": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "tavily-mcp@latest"
+            ],
+            "env": {
+                "TAVILY_API_KEY": "your-key-here"
+            }
+        }
+    }
+}

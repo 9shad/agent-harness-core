@@ -1,0 +1,7 @@
+mcp
+httpx
+typer
+rich
+openai
+pydantic
+mcp-server-fetch

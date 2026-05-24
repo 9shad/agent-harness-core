@@ -1,0 +1,24 @@
+# Skill Definition Template (`skill.md`)
+
+This file describes a "Skill"—a high-level orchestration of multiple tools. While tools are single-action functions, skills are "workflows."
+
+## Template
+# Skill: [Skill Name]
+Description: [What this skill accomplishes]
+Tools Required: [tool_1, tool_2, ...]
+Logic Flow:
+1. [Step 1: describe the first tool call and what to do with the output]
+2. [Step 2: describe the conditional logic or second tool call]
+3. [Step 3: describe the final aggregation of results]
+
+---
+
+## Example: Log Deep-Dive Skill
+# Skill: LogDeepDive
+Description: Performs a comprehensive search across multiple log files to trace a request ID.
+Tools Required: list_dir, read_file, grep_logs
+Logic Flow:
+1. Use `list_dir` to find all files matching the pattern `app-*.log`.
+2. For each file, use `grep_logs` to find all occurrences of the provided `request_id`.
+3. Collect all matching lines and use `read_file` to extract 50 lines of context around each hit.
+4. Aggregate all fragments into a chronological timeline of the request's lifecycle.

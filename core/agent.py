@@ -38,15 +38,20 @@ class Agent:
         self.tool_pool = tool_pool if tool_pool else registry.list_tools()
         self.executor = ToolExecutor()
 
-    def _get_tools_schema(self):
-        schemas = []
-        for name in self.tool_pool:
-            schema = registry.get_schema(name)
-            if not schema:
-                logger.warning(f"Tool '{name}' in tool_pool is not registered in the registry. Skipping.")
-                continue
-            schemas.append(schema)
-        return self.llm.format_tools(schemas)
+    def _get_tools_schema(self):                                                                                                                                             
+          schemas = []                                                                                                                                                         
+          for name in self.tool_pool:                                                                                                                                          
+              schema = registry.get_schema(name)                                                                                                                               
+              if not schema:                                                                                                                                                   
+                  logger.warning(f"Tool '{name}' in tool_pool is not registered in the registry. Skipping.")                                                                   
+                  continue                                                                                                                                                     
+                                                                                                                                                                               
+              # Ensure the name is part of the schema object for the provider                                                                                                  
+              full_schema = schema.copy()                                                                                                                                      
+              full_schema["name"] = name                    
+              schemas.append(full_schema)                                                                                                                                      
+                                                                                                                                                                               
+          return self.llm.format_tools(schemas)
 
     def _validate_args(self, tool_name, args):
         if not tool_name:
